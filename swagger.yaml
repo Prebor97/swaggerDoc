@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Library Management System API
+  title: Library Management Systems API
   version: 1.0.0
   description: API for managing books, authors, and members in a library.
 servers:
