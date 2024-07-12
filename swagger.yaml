@@ -1,0 +1,322 @@
+openapi: 3.0.0
+info:
+  title: Library Management System API
+  version: 1.0.0
+  description: API for managing books, authors, and members in a library.
+servers:
+  - url: http://localhost:8080/api
+
+paths:
+  /books:
+    get:
+      summary: Get all books
+      responses:
+        '200':
+          description: A list of books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+    post:
+      summary: Add a new book
+      requestBody:
+        description: Book object to be added
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '201':
+          description: Book created successfully
+
+  /books/{id}:
+    get:
+      summary: Get a book by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Book details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: Book not found
+    put:
+      summary: Update a book by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Book object to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '200':
+          description: Book updated successfully
+        '404':
+          description: Book not found
+    delete:
+      summary: Delete a book by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Book deleted successfully
+        '404':
+          description: Book not found
+
+  /authors:
+    get:
+      summary: Get all authors
+      responses:
+        '200':
+          description: A list of authors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
+    post:
+      summary: Add a new author
+      requestBody:
+        description: Author object to be added
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+      responses:
+        '201':
+          description: Author created successfully
+
+  /authors/{id}:
+    get:
+      summary: Get an author by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Author details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+        '404':
+          description: Author not found
+    put:
+      summary: Update an author by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Author object to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+      responses:
+        '200':
+          description: Author updated successfully
+        '404':
+          description: Author not found
+    delete:
+      summary: Delete an author by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Author deleted successfully
+        '404':
+          description: Author not found
+
+  /members:
+    get:
+      summary: Get all members
+      responses:
+        '200':
+          description: A list of members
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Member'
+    post:
+      summary: Add a new member
+      requestBody:
+        description: Member object to be added
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Member'
+      responses:
+        '201':
+          description: Member created successfully
+
+  /members/{id}:
+    get:
+      summary: Get a member by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Member details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+        '404':
+          description: Member not found
+    put:
+      summary: Update a member by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Member object to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Member'
+      responses:
+        '200':
+          description: Member updated successfully
+        '404':
+          description: Member not found
+    delete:
+      summary: Delete a member by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Member deleted successfully
+        '404':
+          description: Member not found
+
+  /borrow-records:
+    get:
+      summary: Get all borrow records
+      responses:
+        '200':
+          description: A list of borrow records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BorrowRecord'
+    post:
+      summary: Add a new borrow record
+      requestBody:
+        description: Borrow record object to be added
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BorrowRecord'
+      responses:
+        '201':
+          description: Borrow record created successfully
+
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+        isbn:
+          type: string
+        author_id:
+          type: integer
+        published_date:
+          type: string
+          format: date
+    Author:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+        bio:
+          type: string
+    Member:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+        email:
+          type: string
+        membership_date:
+          type: string
+          format: date
+    BorrowRecord:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        book_id:
+          type: integer
+        member_id:
+          type: integer
+        borrow_date:
+          type: string
+          format: date
+        return_date:
+          type: string
+          format: date
+          nullable: true
